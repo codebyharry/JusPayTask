@@ -30,6 +30,7 @@ const DraggableIcon = forwardRef((props, ref) => {
   const [decreaseBaseBall, setDecreaseBaseBall] = useState(false);
   const [decreaseSprite, setDecreaseSprite] = useState(false);
   const [hello, setHello] = useState(false);
+  const [baseBallHello, setBaseBallHello] = useState(false);
   const isFocused = useIsFocused();
   const panRef = useRef({x: 0, y: 0});
   const rotationValue = useRef(new Animated.Value(0)).current;
@@ -84,9 +85,14 @@ const DraggableIcon = forwardRef((props, ref) => {
           repeat = true;
           break;
         } else if (x === 'Say Hello') {
-          setHello(true);
+          if (actionTab === 'action1') {
+            setHello(true);
+          } else {
+            setBaseBallHello(true);
+          }
           setTimeout(() => {
             setHello(false);
+            setBaseBallHello(false);
           }, 5000);
         } else if (x === 'Increase Size') {
           if (actionTab === 'action1') {
@@ -203,6 +209,10 @@ const DraggableIcon = forwardRef((props, ref) => {
       setAction([]);
       setAction2([]);
       setHello(false);
+      setIncreaseBaseBall(false);
+      setDecreaseBaseBall(false);
+      setIncreaseSprite(false);
+      setDecreaseSprite(false);
       draggableIconRef.current.resetPosition();
     }
   };
@@ -260,7 +270,11 @@ const DraggableIcon = forwardRef((props, ref) => {
               ],
             }}>
             <Image
-              source={require('../assets/baseball.png')}
+              source={
+                baseBallHello
+                  ? require('../assets/baseball_hello.png')
+                  : require('../assets/baseball.png')
+              }
               style={styles.imageDimensions}
             />
           </Animated.View>
@@ -296,7 +310,7 @@ const styles = StyleSheet.create({
   },
   resetButtonContainer: {
     position: 'absolute',
-    top: 10,
+    top: 50,
     right: 10,
     zIndex: 1,
   },

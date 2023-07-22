@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {View, Text, StyleSheet, FlatList, SafeAreaView} from 'react-native';
 import Draggable from 'react-native-draggable';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {data} from '../constants/Data';
@@ -113,7 +113,7 @@ const ActionScreen = () => {
   );
 
   return (
-    <View style={styles.flexOne}>
+    <SafeAreaView style={styles.flexOne}>
       <View style={styles.container}>
         {/* Column 1 */}
         <View style={styles.column}>
@@ -180,7 +180,7 @@ const ActionScreen = () => {
       <TouchableOpacity style={styles.alignCenter} onPress={handleDone}>
         <Text style={styles.doneButton}>Done</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
