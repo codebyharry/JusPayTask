@@ -1,10 +1,4 @@
-import React, {
-  useRef,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useEffect,
-} from 'react';
+import React, {useRef, useState, useImperativeHandle, useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   View,
@@ -18,7 +12,7 @@ import {
 import {useIsFocused} from '@react-navigation/native';
 import {clearData, getData} from '../constants/AsyncData';
 
-const DraggableIcon = forwardRef((props, ref) => {
+const DraggableIcon = (props, ref) => {
   const [lastOffset, setLastOffset] = useState({x: 0, y: 0});
   const draggableIconRef = useRef();
   const pan1 = useRef(new Animated.ValueXY()).current; // For the first image
@@ -34,6 +28,7 @@ const DraggableIcon = forwardRef((props, ref) => {
   const isFocused = useIsFocused();
   const panRef = useRef({x: 0, y: 0});
   const rotationValue = useRef(new Animated.Value(0)).current;
+  const rotationValue2 = useRef(new Animated.Value(0)).current;
   const {baseball} = props;
 
   const handlePlay = async () => {
@@ -52,7 +47,6 @@ const DraggableIcon = forwardRef((props, ref) => {
   const handleAnimation = (data, actionTab) => {
     if (data) {
       const animations = [];
-      let check360 = false;
       let repeat = false;
 
       for (let i = 0; i < data.length; i++) {
@@ -80,7 +74,19 @@ const DraggableIcon = forwardRef((props, ref) => {
             }),
           );
         } else if (x === 'Rotate 360') {
-          check360 = true;
+          if (actionTab === 'action1') {
+            const rotationAnimation = Animated.timing(rotationValue, {
+              toValue: 360,
+              useNativeDriver: false,
+            });
+            animations.push(rotationAnimation);
+          } else {
+            const rotationAnimation = Animated.timing(rotationValue2, {
+              toValue: 360,
+              useNativeDriver: false,
+            });
+            animations.push(rotationAnimation);
+          }
         } else if (x === 'Repeat') {
           repeat = true;
           break;
@@ -111,24 +117,11 @@ const DraggableIcon = forwardRef((props, ref) => {
 
       const moveAnimation = Animated.sequence(animations);
 
-      if (check360) {
-        const rotationAnimation = Animated.timing(rotationValue, {
-          toValue: 360,
-          useNativeDriver: false,
-        });
-        animations.push(rotationAnimation);
-        moveAnimation.start(() => {
-          if (repeat) {
-            Animated.loop(moveAnimation, {iterations: 1}).start();
-          }
-        });
-      } else {
-        moveAnimation.start(() => {
-          if (repeat) {
-            Animated.loop(moveAnimation, {iterations: 1}).start();
-          }
-        });
-      }
+      moveAnimation.start(() => {
+        if (repeat) {
+          Animated.loop(moveAnimation, {iterations: 1}).start();
+        }
+      });
     }
   };
 
@@ -261,7 +254,7 @@ const DraggableIcon = forwardRef((props, ref) => {
                 {translateX: pan2.x},
                 {translateY: pan2.y},
                 {
-                  rotate: rotationValue.interpolate({
+                  rotate: rotationValue2.interpolate({
                     inputRange: [0, 360],
                     outputRange: ['0deg', '360deg'],
                   }),
@@ -297,7 +290,7 @@ const DraggableIcon = forwardRef((props, ref) => {
       </View>
     </View>
   );
-});
+};
 
 export default DraggableIcon;
 
@@ -318,7 +311,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
   },
   imageDimensions: {
     height: 150,

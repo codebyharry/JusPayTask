@@ -22,7 +22,7 @@ const ActionScreen = () => {
       <View style={styles.itemContainer}>
         <Draggable
           renderSize={60}
-          renderColor="pink"
+          renderColor="#7c7ceb"
           shouldReverse
           onDragRelease={(event, gestureState) => onDragEnd(item, columnIndex)}>
           <Text style={styles.draggableText}>{item.text}</Text>
@@ -169,7 +169,7 @@ const ActionScreen = () => {
           )}
           {selectedAction !== 'action1' && selectedAction !== 'action2' && (
             <FlatList
-              data={filteredColumn2} // Use the filtered data here
+              data={filteredColumn2}
               keyExtractor={item => item.id}
               contentContainerStyle={styles.itemsContainer}
               renderItem={({item}) => renderItem({item, columnIndex: 2})}
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   actionHeaderItemSelected: {
-    backgroundColor: 'pink',
+    backgroundColor: '#7c7ceb',
     marginBottom: 10,
   },
   actionSubheading: {
@@ -239,9 +239,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   doneButton: {
-    backgroundColor: 'green',
+    backgroundColor: '#0bff0b',
     padding: 10,
     fontSize: 16,
+    marginBottom: 10,
   },
   flexOne: {
     flex: 1,

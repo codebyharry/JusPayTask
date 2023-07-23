@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   iconBox: {
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     flex: 0.2,
     flexDirection: 'row',
   },
@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     padding: 10,
-    backgroundColor: 'green',
+    backgroundColor: '#0bff0b',
+    borderWidth: 1,
   },
   imageContainer: {
     borderWidth: 1,
