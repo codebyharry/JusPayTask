@@ -1,4 +1,11 @@
 {
   "name": "JusPayTask",
-  "displayName": "JusPayTask"
+  "displayName": "JusPayTask",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "6d058e75-8a23-475a-9032-46e8a9b5a328"
+      }
+    }
+  }
 }
