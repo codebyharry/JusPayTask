@@ -1,5 +1,5 @@
 import React from 'react';
-import StackNavigation from './navigation/StackNavigation';
+import StackNavigation from './src/navigation/StackNavigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 const App = () => {
